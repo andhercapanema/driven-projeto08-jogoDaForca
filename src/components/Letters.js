@@ -1,14 +1,20 @@
 import React from "react";
 
-const Letter = (props) => {
+const Letter = ({ letter, gameHasStarted }) => {
     return (
         <li className="c-alphabet__letter">
-            <button className="c-alphabet__btn">{props.letter}</button>
+            {gameHasStarted ? (
+                <button className="c-alphabet__btn">{letter}</button>
+            ) : (
+                <button className="c-alphabet__btn btn-is-disabled">
+                    {letter}
+                </button>
+            )}
         </li>
     );
 };
 
-function Letters() {
+function Letters({ gameHasStarted }) {
     const alphabet = [
         "a",
         "b",
@@ -40,8 +46,12 @@ function Letters() {
 
     return (
         <ul className="c-alphabet">
-            {alphabet.map((letter) => (
-                <Letter letter={letter.toUpperCase()} />
+            {alphabet.map((letter, index) => (
+                <Letter
+                    key={index}
+                    letter={letter.toUpperCase()}
+                    gameHasStarted={gameHasStarted}
+                />
             ))}
         </ul>
     );
