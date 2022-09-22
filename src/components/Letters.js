@@ -1,56 +1,45 @@
 import React from "react";
 
-const Letter = ({ letter, gameHasStarted }) => {
+function Letter({
+    item: { letter, wasSelected },
+    gameHasStarted,
+    letterIndex,
+    alphabet,
+    setAlphabet,
+}) {
+    function selectLetter() {
+        alphabet[letterIndex].wasSelected = true;
+        setAlphabet([...alphabet]);
+    }
+
+    const activeBtn = gameHasStarted && !wasSelected;
+
     return (
         <li className="c-alphabet__letter">
-            {gameHasStarted ? (
-                <button className="c-alphabet__btn">{letter}</button>
-            ) : (
-                <button className="c-alphabet__btn btn-is-disabled">
-                    {letter}
-                </button>
-            )}
+            <button
+                className={`c-alphabet__btn ${
+                    activeBtn ? "" : "btn-is-disabled"
+                }`}
+                onClick={activeBtn ? () => selectLetter() : () => 0}
+            >
+                {letter.toUpperCase()}
+            </button>
         </li>
     );
-};
+}
 
-function Letters({ gameHasStarted }) {
-    const alphabet = [
-        "a",
-        "b",
-        "c",
-        "d",
-        "e",
-        "f",
-        "g",
-        "h",
-        "i",
-        "j",
-        "k",
-        "l",
-        "m",
-        "n",
-        "o",
-        "p",
-        "q",
-        "r",
-        "s",
-        "t",
-        "u",
-        "v",
-        "w",
-        "x",
-        "y",
-        "z",
-    ];
-
+function Letters({ gameHasStarted, alphabet, setAlphabet }) {
+    console.log(alphabet);
     return (
         <ul className="c-alphabet">
-            {alphabet.map((letter, index) => (
+            {alphabet.map((item, index) => (
                 <Letter
                     key={index}
-                    letter={letter.toUpperCase()}
+                    item={item}
                     gameHasStarted={gameHasStarted}
+                    letterIndex={index}
+                    alphabet={alphabet}
+                    setAlphabet={setAlphabet}
                 />
             ))}
         </ul>

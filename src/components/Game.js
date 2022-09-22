@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import forca0 from "../assets/forca0.png";
 import words from "./words";
 
-function Game({ gameHasStarted, setGameHasStarted }) {
+function Game({ gameHasStarted, setGameHasStarted, alphabet, setAlphabet }) {
     const [word, setWord] = useState([]);
     const [textStartButton, setTextStartButton] = useState("Escolher Palavra");
 
@@ -17,9 +17,18 @@ function Game({ gameHasStarted, setGameHasStarted }) {
         setGameHasStarted(true);
     }
 
+    function restartLetters() {
+        setAlphabet(
+            alphabet.map((item) => {
+                return { letter: item.letter, wasSelected: false };
+            })
+        );
+    }
+
     function startGame() {
         renderWord();
         enableButtons();
+        restartLetters();
     }
 
     return (
