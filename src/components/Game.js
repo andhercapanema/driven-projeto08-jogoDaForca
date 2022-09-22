@@ -2,18 +2,25 @@ import React, { useState } from "react";
 import forca0 from "../assets/forca0.png";
 import words from "./words";
 
-function Game({ gameHasStarted, setGameHasStarted, alphabet, setAlphabet }) {
-    const [word, setWord] = useState([]);
-    const [textStartButton, setTextStartButton] = useState("Escolher Palavra");
-
+function Game({
+    gameHasStarted,
+    setGameHasStarted,
+    alphabet,
+    setAlphabet,
+    word,
+    setWord,
+}) {
     function renderWord() {
         const indexRandomWord = Math.round(Math.random() * words.length);
-        const wordArray = words[indexRandomWord].split("");
-        setWord(wordArray.map((letter) => "_"));
+        const selectedWordArray = words[indexRandomWord].split("");
+        setWord(
+            selectedWordArray.map((item) => {
+                return { letter: item, wasGuessed: false };
+            })
+        );
     }
 
     function enableButtons() {
-        setTextStartButton("Mudar Palavra");
         setGameHasStarted(true);
     }
 
@@ -36,9 +43,11 @@ function Game({ gameHasStarted, setGameHasStarted, alphabet, setAlphabet }) {
             <img src={forca0} alt="Forca vazia" className="c-game__img" />
             <div className="u-column">
                 <button className="c-game__button" onClick={startGame}>
-                    {textStartButton}
+                    {gameHasStarted ? "Mudar Palavra" : "Escolher Palavra"}
                 </button>
-                <p className="c-game__word">{word}</p>
+                <p className="c-game__word">
+                    {word.map((item) => (item.wasGuessed ? item.letter : "_"))}
+                </p>
             </div>
         </section>
     );

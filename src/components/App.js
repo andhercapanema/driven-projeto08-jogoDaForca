@@ -40,6 +40,8 @@ function App() {
         })
     );
 
+    const [word, setWord] = useState([]);
+
     return (
         <main className="c-page">
             <Jogo
@@ -47,11 +49,15 @@ function App() {
                 setGameHasStarted={setGameHasStarted}
                 alphabet={alphabet}
                 setAlphabet={setAlphabet}
+                word={word}
+                setWord={setWord}
             />
             <Letters
                 gameHasStarted={gameHasStarted}
                 alphabet={alphabet}
                 setAlphabet={setAlphabet}
+                word={word}
+                setWord={setWord}
             />
             <Guess gameHasStarted={gameHasStarted} />
         </main>

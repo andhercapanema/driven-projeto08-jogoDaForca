@@ -1,18 +1,35 @@
 import React from "react";
 
 function Letter({
-    item: { letter, wasSelected },
-    gameHasStarted,
+    alphabetItem,
     letterIndex,
+    gameHasStarted,
     alphabet,
     setAlphabet,
+    word,
+    setWord,
 }) {
     function selectLetter() {
         alphabet[letterIndex].wasSelected = true;
         setAlphabet([...alphabet]);
+
+        word.forEach((letterInWord) => {
+            const letterInWordWithoutAccentuation = letterInWord.letter
+                .replace(/[àáâãäå]/, "a")
+                .replace(/[èéê]/, "e")
+                .replace(/[ìíî]/, "i")
+                .replace(/[òóô]/, "o")
+                .replace(/[ùúû]/, "u")
+                .replace(/[ç]/, "c");
+
+            if (letterInWordWithoutAccentuation === alphabetItem.letter) {
+                letterInWord.wasGuessed = true;
+            }
+        });
+        setWord([...word]);
     }
 
-    const activeBtn = gameHasStarted && !wasSelected;
+    const activeBtn = gameHasStarted && !alphabetItem.wasSelected;
 
     return (
         <li className="c-alphabet__letter">
@@ -22,24 +39,25 @@ function Letter({
                 }`}
                 onClick={activeBtn ? () => selectLetter() : () => 0}
             >
-                {letter.toUpperCase()}
+                {alphabetItem.letter.toUpperCase()}
             </button>
         </li>
     );
 }
 
-function Letters({ gameHasStarted, alphabet, setAlphabet }) {
-    console.log(alphabet);
+function Letters({ gameHasStarted, alphabet, setAlphabet, word, setWord }) {
     return (
         <ul className="c-alphabet">
-            {alphabet.map((item, index) => (
+            {alphabet.map((alphabetItem, index) => (
                 <Letter
                     key={index}
-                    item={item}
-                    gameHasStarted={gameHasStarted}
+                    alphabetItem={alphabetItem}
                     letterIndex={index}
+                    gameHasStarted={gameHasStarted}
                     alphabet={alphabet}
                     setAlphabet={setAlphabet}
+                    word={word}
+                    setWord={setWord}
                 />
             ))}
         </ul>
