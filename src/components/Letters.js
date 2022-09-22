@@ -8,8 +8,12 @@ function Letter({
     setAlphabet,
     word,
     setWord,
+    errorsAmount,
+    setErrorsAmount,
 }) {
     function selectLetter() {
+        let wordContainsLetter = false;
+
         alphabet[letterIndex].wasSelected = true;
         setAlphabet([...alphabet]);
 
@@ -24,9 +28,15 @@ function Letter({
 
             if (letterInWordWithoutAccentuation === alphabetItem.letter) {
                 letterInWord.wasGuessed = true;
+                wordContainsLetter = true;
             }
         });
         setWord([...word]);
+
+        if (!wordContainsLetter) {
+            setErrorsAmount(errorsAmount + 1);
+            console.log(errorsAmount);
+        }
     }
 
     const activeBtn = gameHasStarted && !alphabetItem.wasSelected;
@@ -45,7 +55,15 @@ function Letter({
     );
 }
 
-function Letters({ gameHasStarted, alphabet, setAlphabet, word, setWord }) {
+function Letters({
+    gameHasStarted,
+    alphabet,
+    setAlphabet,
+    word,
+    setWord,
+    errorsAmount,
+    setErrorsAmount,
+}) {
     return (
         <ul className="c-alphabet">
             {alphabet.map((alphabetItem, index) => (
@@ -58,6 +76,8 @@ function Letters({ gameHasStarted, alphabet, setAlphabet, word, setWord }) {
                     setAlphabet={setAlphabet}
                     word={word}
                     setWord={setWord}
+                    errorsAmount={errorsAmount}
+                    setErrorsAmount={setErrorsAmount}
                 />
             ))}
         </ul>
