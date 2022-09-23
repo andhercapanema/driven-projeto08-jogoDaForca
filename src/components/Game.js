@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import gallows0 from "../assets/forca0.png";
 import gallows1 from "../assets/forca1.png";
 import gallows2 from "../assets/forca2.png";
@@ -63,15 +63,21 @@ function Game({
     return (
         <section className="c-game">
             <img
+                data-identifier="game-image"
                 src={gallowsImgArr[errorsAmount]}
                 alt="Forca vazia"
                 className="c-game__img"
             />
             <div className="u-column">
-                <button className="c-game__button" onClick={startGame}>
+                <button
+                    data-identifier="choose-word"
+                    className="c-game__button"
+                    onClick={startGame}
+                >
                     {gameHasStarted ? "Mudar Palavra" : "Escolher Palavra"}
                 </button>
                 <p
+                    data-identifier="word"
                     className={`c-game__word ${
                         errorsAmount === 6
                             ? "u-defeated-text"

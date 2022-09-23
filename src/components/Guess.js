@@ -46,6 +46,7 @@ function Guess({
             <p className="c-guess__text">Já sei a palavra!</p>
             <div className="c-guess__keep-together">
                 <input
+                    data-identifier="type-guess"
                     type="text"
                     className="c-guess__input"
                     disabled={gameHasStarted ? false : true}
@@ -53,6 +54,7 @@ function Guess({
                     value={attempt}
                 ></input>
                 <button
+                    data-identifier="guess-button"
                     className={`c-guess__btn ${
                         gameHasStarted ? "" : "btn-is-disabled"
                     } `}

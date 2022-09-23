@@ -57,6 +57,7 @@ function Letter({
     return (
         <li className="c-alphabet__letter">
             <button
+                data-identifier="letter"
                 className={`c-alphabet__btn ${
                     activeBtn ? "" : "btn-is-disabled"
                 }`}
