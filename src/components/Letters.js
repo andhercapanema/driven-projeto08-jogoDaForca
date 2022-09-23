@@ -11,6 +11,7 @@ function Letter({
     setWord,
     errorsAmount,
     setErrorsAmount,
+    setWordWasGuessed,
 }) {
     function endGame() {
         word.forEach((letter) => (letter.wasGuessed = true));
@@ -45,6 +46,14 @@ function Letter({
                 endGame();
             }
         }
+
+        const updatedWordWasGuessed =
+            word.filter((letterInWord) => letterInWord.wasGuessed === false)
+                .length === 0;
+        setWordWasGuessed(updatedWordWasGuessed);
+        if (updatedWordWasGuessed) {
+            endGame();
+        }
     }
 
     const activeBtn = gameHasStarted && !alphabetItem.wasSelected;
@@ -72,6 +81,7 @@ function Letters({
     setWord,
     errorsAmount,
     setErrorsAmount,
+    setWordWasGuessed,
 }) {
     return (
         <ul className="c-alphabet">
@@ -88,6 +98,7 @@ function Letters({
                     setWord={setWord}
                     errorsAmount={errorsAmount}
                     setErrorsAmount={setErrorsAmount}
+                    setWordWasGuessed={setWordWasGuessed}
                 />
             ))}
         </ul>

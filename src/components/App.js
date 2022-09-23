@@ -42,6 +42,7 @@ function App() {
 
     const [word, setWord] = useState([]);
     const [errorsAmount, setErrorsAmount] = useState(0);
+    const [wordWasGuessed, setWordWasGuessed] = useState(false);
 
     return (
         <main className="c-page">
@@ -54,6 +55,8 @@ function App() {
                 setWord={setWord}
                 errorsAmount={errorsAmount}
                 setErrorsAmount={setErrorsAmount}
+                wordWasGuessed={wordWasGuessed}
+                setWordWasGuessed={setWordWasGuessed}
             />
             <Letters
                 gameHasStarted={gameHasStarted}
@@ -63,6 +66,7 @@ function App() {
                 word={word}
                 errorsAmount={errorsAmount}
                 setErrorsAmount={setErrorsAmount}
+                setWordWasGuessed={setWordWasGuessed}
             />
             <Guess gameHasStarted={gameHasStarted} />
         </main>

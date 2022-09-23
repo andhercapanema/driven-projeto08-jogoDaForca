@@ -169,7 +169,15 @@ button {
     flex-direction: column;
 }
 
-.u-defeated-text {
-    color: red;
+.u-defeated-text,
+.u-victory-text {
     font-weight: 600;
+}
+
+.u-defeated-text {
+    color: rgb(175, 40, 40);
+}
+
+.u-victory-text {
+    color: #27ae60;
 }

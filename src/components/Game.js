@@ -17,6 +17,8 @@ function Game({
     setWord,
     errorsAmount,
     setErrorsAmount,
+    wordWasGuessed,
+    setWordWasGuessed,
 }) {
     const gallowsImgArr = [
         gallows0,
@@ -55,6 +57,7 @@ function Game({
         enableButtons();
         restartLetters();
         setErrorsAmount(0);
+        setWordWasGuessed(false);
     }
 
     return (
@@ -70,7 +73,11 @@ function Game({
                 </button>
                 <p
                     className={`c-game__word ${
-                        errorsAmount === 6 ? "u-defeated-text" : ""
+                        errorsAmount === 6
+                            ? "u-defeated-text"
+                            : wordWasGuessed
+                            ? "u-victory-text"
+                            : ""
                     }`}
                 >
                     {word.map((item) => (item.wasGuessed ? item.letter : "_"))}
