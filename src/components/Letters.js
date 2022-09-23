@@ -12,12 +12,8 @@ function Letter({
     errorsAmount,
     setErrorsAmount,
     setWordWasGuessed,
+    endGame,
 }) {
-    function endGame() {
-        word.forEach((letter) => (letter.wasGuessed = true));
-        setGameHasStarted(false);
-    }
-
     function selectLetter() {
         let wordContainsLetter = false;
 
@@ -82,6 +78,7 @@ function Letters({
     errorsAmount,
     setErrorsAmount,
     setWordWasGuessed,
+    endGame,
 }) {
     return (
         <ul className="c-alphabet">
@@ -99,6 +96,7 @@ function Letters({
                     errorsAmount={errorsAmount}
                     setErrorsAmount={setErrorsAmount}
                     setWordWasGuessed={setWordWasGuessed}
+                    endGame={endGame}
                 />
             ))}
         </ul>

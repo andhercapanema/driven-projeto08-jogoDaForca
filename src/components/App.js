@@ -44,6 +44,13 @@ function App() {
     const [errorsAmount, setErrorsAmount] = useState(0);
     const [wordWasGuessed, setWordWasGuessed] = useState(false);
 
+    function endGame() {
+        word.forEach((letter) => (letter.wasGuessed = true));
+        setGameHasStarted(false);
+    }
+
+    console.log(word);
+
     return (
         <main className="c-page">
             <Jogo
@@ -67,8 +74,16 @@ function App() {
                 errorsAmount={errorsAmount}
                 setErrorsAmount={setErrorsAmount}
                 setWordWasGuessed={setWordWasGuessed}
+                endGame={endGame}
             />
-            <Guess gameHasStarted={gameHasStarted} />
+            <Guess
+                gameHasStarted={gameHasStarted}
+                word={word}
+                setWordWasGuessed={setWordWasGuessed}
+                setGameHasStarted={setGameHasStarted}
+                endGame={endGame}
+                setErrorsAmount={setErrorsAmount}
+            />
         </main>
     );
 }
