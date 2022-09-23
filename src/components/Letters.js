@@ -3,6 +3,7 @@ import React from "react";
 function Letter({
     alphabetItem,
     letterIndex,
+    setGameHasStarted,
     gameHasStarted,
     alphabet,
     setAlphabet,
@@ -11,6 +12,11 @@ function Letter({
     errorsAmount,
     setErrorsAmount,
 }) {
+    function endGame() {
+        word.forEach((letter) => (letter.wasGuessed = true));
+        setGameHasStarted(false);
+    }
+
     function selectLetter() {
         let wordContainsLetter = false;
 
@@ -31,11 +37,13 @@ function Letter({
                 wordContainsLetter = true;
             }
         });
-        setWord([...word]);
 
         if (!wordContainsLetter) {
-            setErrorsAmount(errorsAmount + 1);
-            console.log(errorsAmount);
+            const updatedErrorAmount = errorsAmount + 1;
+            setErrorsAmount(updatedErrorAmount);
+            if (updatedErrorAmount === 6) {
+                endGame();
+            }
         }
     }
 
@@ -57,6 +65,7 @@ function Letter({
 
 function Letters({
     gameHasStarted,
+    setGameHasStarted,
     alphabet,
     setAlphabet,
     word,
@@ -72,6 +81,7 @@ function Letters({
                     alphabetItem={alphabetItem}
                     letterIndex={index}
                     gameHasStarted={gameHasStarted}
+                    setGameHasStarted={setGameHasStarted}
                     alphabet={alphabet}
                     setAlphabet={setAlphabet}
                     word={word}

@@ -57,6 +57,7 @@ function App() {
             />
             <Letters
                 gameHasStarted={gameHasStarted}
+                setGameHasStarted={setGameHasStarted}
                 alphabet={alphabet}
                 setAlphabet={setAlphabet}
                 word={word}

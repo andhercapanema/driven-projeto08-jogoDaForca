@@ -68,7 +68,11 @@ function Game({
                 <button className="c-game__button" onClick={startGame}>
                     {gameHasStarted ? "Mudar Palavra" : "Escolher Palavra"}
                 </button>
-                <p className="c-game__word">
+                <p
+                    className={`c-game__word ${
+                        errorsAmount === 6 ? "u-defeated-text" : ""
+                    }`}
+                >
                     {word.map((item) => (item.wasGuessed ? item.letter : "_"))}
                 </p>
             </div>
