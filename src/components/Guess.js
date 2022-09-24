@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 
 function Guess({
     gameHasStarted,
@@ -42,29 +43,79 @@ function Guess({
     /* ------------------------------- */
 
     return (
-        <section className="c-guess">
-            <p className="c-guess__text">Já sei a palavra!</p>
-            <div className="c-guess__keep-together">
-                <input
+        <SectionGuess>
+            <GuessText>Já sei a palavra!</GuessText>
+            <GuessContainer>
+                <GuessInput
                     data-identifier="type-guess"
                     type="text"
                     className="c-guess__input"
                     disabled={gameHasStarted ? false : true}
                     onChange={(event) => setAttempt(event.target.value)}
                     value={attempt}
-                ></input>
-                <button
+                ></GuessInput>
+                <GuessButton
                     data-identifier="guess-button"
-                    className={`c-guess__btn ${
-                        gameHasStarted ? "" : "btn-is-disabled"
-                    } `}
+                    disabled={gameHasStarted ? false : true}
                     onClick={checkAttempt}
                 >
                     Chutar
-                </button>
-            </div>
-        </section>
+                </GuessButton>
+            </GuessContainer>
+        </SectionGuess>
     );
 }
 
 export default Guess;
+
+const SectionGuess = styled.section`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-right: 20px;
+`;
+
+const GuessText = styled.p`
+    font-size: 18px;
+
+    margin-left: 20px;
+    margin-top: 20px;
+`;
+
+const GuessContainer = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
+const GuessInput = styled.input`
+    height: 40px;
+    width: 90vw;
+    max-width: 420px;
+
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-top: 20px;
+`;
+
+const GuessButton = styled.button`
+    width: 100px;
+    height: 40px;
+    background-color: #e1ecf4;
+    border: 1px solid #2b77aa;
+    color: #2b77aa;
+
+    border-radius: 5px;
+    margin-left: 20px;
+    margin-top: 20px;
+
+    ${(props) =>
+        props.disabled &&
+        css`
+            cursor: default;
+            border: none;
+            background-color: #9faab5;
+            color: #7c818a;
+        `}
+`;

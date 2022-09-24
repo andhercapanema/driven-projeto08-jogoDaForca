@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Jogo from "./Game";
 import Guess from "./Guess";
 import Letters from "./Letters";
+import GlobalStyle from "../styles/GlobalStyle";
+import styled from "styled-components";
 
 function App() {
     const [gameHasStarted, setGameHasStarted] = useState(false);
@@ -52,7 +54,8 @@ function App() {
     console.log(word);
 
     return (
-        <main className="c-page">
+        <MainPage>
+            <GlobalStyle />
             <Jogo
                 gameHasStarted={gameHasStarted}
                 setGameHasStarted={setGameHasStarted}
@@ -84,8 +87,20 @@ function App() {
                 endGame={endGame}
                 setErrorsAmount={setErrorsAmount}
             />
-        </main>
+        </MainPage>
     );
 }
 
 export default App;
+
+const MainPage = styled.main`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    height: 90%;
+    max-height: 700px;
+    width: 90%;
+    max-width: 1000px;
+`;

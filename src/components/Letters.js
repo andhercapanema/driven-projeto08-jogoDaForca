@@ -1,4 +1,5 @@
 import React from "react";
+import styled, { css } from "styled-components";
 
 function Letter({
     alphabetItem,
@@ -55,17 +56,19 @@ function Letter({
     const activeBtn = gameHasStarted && !alphabetItem.wasSelected;
 
     return (
-        <li className="c-alphabet__letter">
-            <button
+        <LetterLi className="c-alphabet__letter">
+            <LettersButton
                 data-identifier="letter"
                 className={`c-alphabet__btn ${
                     activeBtn ? "" : "btn-is-disabled"
                 }`}
-                onClick={activeBtn ? () => selectLetter() : () => 0}
+                // onClick={activeBtn ? () => selectLetter() : ""}
+                onClick={selectLetter}
+                disabled={activeBtn ? false : true}
             >
                 {alphabetItem.letter.toUpperCase()}
-            </button>
-        </li>
+            </LettersButton>
+        </LetterLi>
     );
 }
 
@@ -82,7 +85,7 @@ function Letters({
     endGame,
 }) {
     return (
-        <ul className="c-alphabet">
+        <LettersList className="c-alphabet">
             {alphabet.map((alphabetItem, index) => (
                 <Letter
                     key={index}
@@ -100,8 +103,42 @@ function Letters({
                     endGame={endGame}
                 />
             ))}
-        </ul>
+        </LettersList>
     );
 }
 
 export default Letters;
+
+const LettersList = styled.ul`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 780px;
+    margin-left: 10px;
+    margin-top: 20px;
+`;
+
+const LetterLi = styled.li`
+    margin-right: 10px;
+    margin-bottom: 10px;
+`;
+
+const LettersButton = styled.button`
+    width: 50px;
+    height: 50px;
+
+    border-radius: 5px;
+
+    background-color: #e1ecf4;
+    border: 1px solid #2b77aa;
+    color: #2b77aa;
+
+    ${(props) =>
+        props.disabled &&
+        css`
+            cursor: default;
+            border: none;
+            background-color: #9faab5;
+            color: #7c818a;
+        `}
+`;
