@@ -97,6 +97,8 @@ const GuessInput = styled.input`
     border-radius: 5px;
     margin-left: 20px;
     margin-top: 20px;
+
+    font-size: 18px
 `;
 
 const GuessButton = styled.button`

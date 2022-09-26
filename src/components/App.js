@@ -51,8 +51,6 @@ function App() {
         setGameHasStarted(false);
     }
 
-    console.log(word);
-
     return (
         <MainPage>
             <GlobalStyle />

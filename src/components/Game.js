@@ -124,7 +124,7 @@ const GameButton = styled.button`
     border-radius: 10px;
 `;
 
-const GameWord = styled.p`
+const GameWord = styled.h1`
     letter-spacing: 5px;
     font-size: 28px;
     color: ${(props) => props.color};

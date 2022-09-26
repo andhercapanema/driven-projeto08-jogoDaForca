@@ -15,9 +15,11 @@ function Letter({
     setWordWasGuessed,
     endGame,
 }) {
-    function selectLetter() {
-        let wordContainsLetter = false;
+    let wordContainsLetter = word
+        .map((letter) => letter.letter)
+        .includes(alphabetItem.letter);
 
+    function selectLetter() {
         alphabet[letterIndex].wasSelected = true;
         setAlphabet([...alphabet]);
 
@@ -32,7 +34,7 @@ function Letter({
 
             if (letterInWordWithoutAccentuation === alphabetItem.letter) {
                 letterInWord.wasGuessed = true;
-                wordContainsLetter = true;
+                // wordContainsLetter = true;
             }
         });
 
@@ -62,9 +64,10 @@ function Letter({
                 className={`c-alphabet__btn ${
                     activeBtn ? "" : "btn-is-disabled"
                 }`}
-                // onClick={activeBtn ? () => selectLetter() : ""}
                 onClick={selectLetter}
                 disabled={activeBtn ? false : true}
+                wordContainsLetter={wordContainsLetter}
+                gameHasStarted={gameHasStarted}
             >
                 {alphabetItem.letter.toUpperCase()}
             </LettersButton>
@@ -140,5 +143,23 @@ const LettersButton = styled.button`
             border: none;
             background-color: #9faab5;
             color: #7c818a;
-        `}
+        `};
+
+    ${(props) =>
+        props.gameHasStarted &&
+        props.wordContainsLetter &&
+        props.disabled &&
+        css`
+            background-color: #27ae60;
+            color: #fff;
+        `};
+
+    ${(props) =>
+        props.gameHasStarted &&
+        !props.wordContainsLetter &&
+        props.disabled &&
+        css`
+            background-color: #af2828;
+            color: #fff;
+        `};
 `;
